@@ -43,7 +43,7 @@ class Quick():
 #     print(all(l[i] <= l[i + 1] for i in range(len(l) - 1)))
 
 if __name__ == "__main__":
-    lst = [random.randint(0, 100) for _ in range(10)]
+    lst = [random.randrange(1000000) for _ in range(1000000)]
 
     def test_my():
         Quick.sort(lst)
@@ -56,8 +56,9 @@ if __name__ == "__main__":
                       setup="from __main__ import test_my")
     t2 = timeit.Timer("test_in()", setup="from __main__ import test_in")
 
-    print("我的:", t1.timeit())
-    print("内置:", t2.timeit())
+    for i in range(5):
+        print("我的:", t1.repeat(1,1))
+    #     print("内置:", t2.repeat(1,1))
     # 我的: 16.32613764534548
     # 内置: 0.36055063123403386
 
