@@ -7,9 +7,9 @@ def binsearch(lst, tar):
     mid = (left + right) // 2  # 本不需要，奇怪
     while left <= right:
         mid = (left + right) // 2
-        if tar > lst[mid][0]:
+        if tar < lst[mid][0]:
             left = mid + 1
-        elif tar < lst[mid][0]:
+        elif tar > lst[mid][0]:
             right = mid - 1
         else:
             return mid
@@ -18,7 +18,7 @@ def binsearch(lst, tar):
         return 0
     elif mid == len(lst):
         return mid
-    return mid if lst[mid][0] < tar else mid - 1
+    return mid if lst[mid][0] < tar else mid + 1
 
 
 class Node:
@@ -39,7 +39,7 @@ data = []
 # read data
 # 10 testcases, each case has 10k characters
 with open('data.txt', 'r', encoding='utf8') as f:
-    data = [f.read(100000) for _ in range(1)]
+    data = [f.read(10) for _ in range(1)]
 
 d = {}
 # data[0] = 'a' * 45 + 'b' * 13 + 'c' * 12 + 'd' * 16 + 'e' * 9 + 'f' * 5
@@ -61,6 +61,7 @@ n = len(pq)
 for i in range(n - 1):
     l, r = pq.pop(), pq.pop()
     node = Node(l, r)
+    # print(l[1],r[1])
 
     pq.insert(binsearch(pq, l[0] + r[0]), (l[0] + r[0], node))
 
@@ -78,7 +79,7 @@ def dfs(node, depth):
         d2[node[1]] = depth
 
 
-dfs(root, 1)
+dfs(root, 0)
 
 # for k, v in d2.items():
 #     print(k, v)
@@ -116,16 +117,17 @@ print('fixed bits length', s1 * 8)
 print('dynamic bits length', SUM)
 
 # 10
-# 80 55
+# 80 32
 
 # 100
-# 800 952
+# 800 441
 
 # 1000
 # 8000 13279
+# 8000 4921
 
 # 10000
-# 80000 101161
+# 80000 45574
 
 # 100000
-# 800000 985886
+# 800000 450061
